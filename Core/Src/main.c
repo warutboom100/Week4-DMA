@@ -200,7 +200,7 @@ static void MX_ADC1_Init(void)
   */
   sConfig.Channel = ADC_CHANNEL_0;
   sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_480CYCLES;
+  sConfig.SamplingTime = ADC_SAMPLETIME_144CYCLES;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
     Error_Handler();
@@ -326,6 +326,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
 	if(GPIO_Pin == GPIO_PIN_13)
 	{
+		TimeResponse = 0;
 		HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin,0);
 		TimeStamp = HAL_GetTick();
 		RandomTime = 1000+((22695477*ADCData[0])+ADCData[1])%10000;
